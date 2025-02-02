@@ -6,7 +6,6 @@ import Dropdown from "../../../components/dropdown/Dropdown";
 import Progressbar from "../../../components/progressbar/Progressbar";
 import TokenInfo from "../../../components/tokenInfo/TokenInfo";
 import BannerWrapper from "./Banner.style";
-
 import {
   useAccount,
   useBalance,
@@ -128,29 +127,12 @@ const Banner = () => {
     paymentPrice,
   ]);
 
-  const handlePaymentInput = (e) => {
-    let _inputValue = e.target.value;
-    setPaymentAmount(_inputValue);
-
-    if (_inputValue >= currentPrice) {
-      let _amount = parseInt(_inputValue / currentPrice);
-      setBuyAmount(_amount);
-
-      let _bonusAmount = parseInt((_amount * currentBonus) / 100);
-      setBonusAmount(_bonusAmount);
-
-      let _totalAmount = _amount + _bonusAmount;
-      setTotalAmount(_totalAmount);
-
-      if (_inputValue != "" && _inputValue >= 0) {
-        setPaymentPrice(_inputValue);
-      }
-    }
-  };
-
-  const buyToken = () => {
-    if (paymentAmount != "" && paymentAmount >= currentPrice) {
-      write?.();
+  const handleBuyToken = () => {
+    if (paymentAmount > 0) {
+      setBuyAmount(paymentAmount);
+      setBonusAmount((paymentAmount * currentBonus) / 100);
+      setTotalAmount(buyAmount + bonusAmount);
+      write();
     }
   };
 
@@ -224,7 +206,7 @@ const Banner = () => {
                       id="paymentInput"
                       placeholder="0"
                       value={paymentAmount}
-                      onChange={handlePaymentInput}
+                      onChange={(e) => setPaymentAmount(e.target.value)}
                     />
                   </div>
                 </div>
@@ -234,29 +216,19 @@ const Banner = () => {
                     <h6>$ Amount</h6>
                     <input
                       type="text"
-                      name=""
-                      id=""
-                      placeholder="0"
+                      name="usdAmount"
+                      id="usdAmount"
                       value={paymentUsd}
-                      disabled
-                    />
-                  </div>
-                  <div className="presale-item-inner">
-                    <h6>Get Amount ( {tokenSymbol} )</h6>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      placeholder="0"
-                      value={totalAmount}
-                      disabled
+                      readOnly
                     />
                   </div>
                 </div>
 
-                <Button variant="green" onClick={buyToken}>
-                  Buy Now
-                </Button>
+                <div className="presale-item mb-40">
+                  <Button variant="green" onClick={handleBuyToken}>
+                    Buy Now
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
