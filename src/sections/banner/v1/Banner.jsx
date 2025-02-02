@@ -38,7 +38,7 @@ const Banner = () => {
   const [currentStage, setCurrentStage] = useState(1);
   const [currentBonus, setCurrentBonus] = useState("20");
   const [currentPrice, setCurrentPrice] = useState("0.001");
-  const [stageEnd, setStageEnd] = useState(1703916000);
+  const [stageEnd, setStageEnd] = useState(1746230400);
   const [nextStage, setNextStage] = useState(0);
   const [nextPrice, setNextPrice] = useState("0.002");
   const [tokenName, setTokenName] = useState("GITTU TOKEN");
