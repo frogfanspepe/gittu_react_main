@@ -11,7 +11,7 @@ const tokenContractAddress = "0x718ba7405F48C5d9A0B35d2527F914aB4BBcF0bE";
 const presaleContractAddress = "0xaC348406872c083Ece10848E0337F4be4A1AD1Ce";
 
 //payment with (eg. ETH, BNB, MATIC etc.)
-export const payWith = "ETH";
+export const payWith = "BNB";
 
 //token contract configuration
 export const tokenContractConfig = {
@@ -106,7 +106,7 @@ export const buyTokenCall = {
 export const GetUSDExchangeRate = async () => {
   var requestOptions = { method: "GET", redirect: "follow" };
   return fetch(
-    "https://api.coinbase.com/v2/exchange-rates?currency=ETH",
+    "https://api.coinbase.com/v2/exchange-rates?currency=BNB",
     requestOptions
   )
     .then((response) => response.json())
