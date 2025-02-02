@@ -53,7 +53,7 @@ const Banner = () => {
   const [currentStage, setCurrentStage] = useState(1);
   const [currentBonus, setCurrentBonus] = useState("20");
   const [currentPrice, setCurrentPrice] = useState("0.001");
-  const [stageEnd, setStageEnd] = useState(1703916000);
+  const [stageEnd, setStageEnd] = useState(1746230400);
   const [presaleToken, setPresaleToken] = useState(10000);
   const [tokenSymbol, setTokenSymbol] = useState("GITTU");
   const [softCap, setSoftCap] = useState("10");
