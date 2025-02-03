@@ -6,6 +6,7 @@ import Dropdown from "../../../components/dropdown/Dropdown";
 import Progressbar from "../../../components/progressbar/Progressbar";
 import TokenInfo from "../../../components/tokenInfo/TokenInfo";
 import BannerWrapper from "./Banner.style";
+
 import {
   useAccount,
   useBalance,
@@ -30,7 +31,7 @@ const Banner = () => {
   const [currentStage, setCurrentStage] = useState(1);
   const [currentBonus, setCurrentBonus] = useState("20");
   const [currentPrice, setCurrentPrice] = useState("0.001");
-  const [stageEnd, setStageEnd] = useState(1746230400);
+  const [stageEnd, setStageEnd] = useState(1703916000);
   const [tokenName, setTokenName] = useState("GITTU TOKEN");
   const [tokenSymbol, setTokenSymbol] = useState("GITTU");
   const [userBalance, setUserBalance] = useState("28.25 ETH");
@@ -127,12 +128,29 @@ const Banner = () => {
     paymentPrice,
   ]);
 
-  const handleBuyToken = () => {
-    if (paymentAmount > 0) {
-      setBuyAmount(paymentAmount);
-      setBonusAmount((paymentAmount * currentBonus) / 100);
-      setTotalAmount(buyAmount + bonusAmount);
-      write();
+  const handlePaymentInput = (e) => {
+    let _inputValue = e.target.value;
+    setPaymentAmount(_inputValue);
+
+    if (_inputValue >= currentPrice) {
+      let _amount = parseInt(_inputValue / currentPrice);
+      setBuyAmount(_amount);
+
+      let _bonusAmount = parseInt((_amount * currentBonus) / 100);
+      setBonusAmount(_bonusAmount);
+
+      let _totalAmount = _amount + _bonusAmount;
+      setTotalAmount(_totalAmount);
+
+      if (_inputValue != "" && _inputValue >= 0) {
+        setPaymentPrice(_inputValue);
+      }
+    }
+  };
+
+  const buyToken = () => {
+    if (paymentAmount != "" && paymentAmount >= currentPrice) {
+      write?.();
     }
   };
 
@@ -206,7 +224,7 @@ const Banner = () => {
                       id="paymentInput"
                       placeholder="0"
                       value={paymentAmount}
-                      onChange={(e) => setPaymentAmount(e.target.value)}
+                      onChange={handlePaymentInput}
                     />
                   </div>
                 </div>
@@ -216,19 +234,29 @@ const Banner = () => {
                     <h6>$ Amount</h6>
                     <input
                       type="text"
-                      name="usdAmount"
-                      id="usdAmount"
+                      name=""
+                      id=""
+                      placeholder="0"
                       value={paymentUsd}
-                      readOnly
+                      disabled
+                    />
+                  </div>
+                  <div className="presale-item-inner">
+                    <h6>Get Amount ( {tokenSymbol} )</h6>
+                    <input
+                      type="text"
+                      name=""
+                      id=""
+                      placeholder="0"
+                      value={totalAmount}
+                      disabled
                     />
                   </div>
                 </div>
 
-                <div className="presale-item mb-40">
-                  <Button variant="green" onClick={handleBuyToken}>
-                    Buy Now
-                  </Button>
-                </div>
+                <Button variant="green" onClick={buyToken}>
+                  Buy Now
+                </Button>
               </div>
             </div>
           </div>
