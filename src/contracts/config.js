@@ -5,13 +5,13 @@ import TokenContractAbi from "./TokenContractAbi.json";
 import PresaleContractAbi from "./PresaleContractAbi.json";
 
 //token contract address
-const tokenContractAddress = "0xa0907aA063997da2DD24Ea7B07Bb59edb26B3856";
+const tokenContractAddress = "0x718ba7405F48C5d9A0B35d2527F914aB4BBcF0bE";
 
 //token presale contract address
-const presaleContractAddress = "0x17f6a9D226f93De79bc828fBe4760f17d7856615";
+const presaleContractAddress = "0xaC348406872c083Ece10848E0337F4be4A1AD1Ce";
 
 //payment with (eg. ETH, BNB, MATIC etc.)
-export const payWith = "BNB";
+export const payWith = "ETH";
 
 //token contract configuration
 export const tokenContractConfig = {
@@ -106,7 +106,7 @@ export const buyTokenCall = {
 export const GetUSDExchangeRate = async () => {
   var requestOptions = { method: "GET", redirect: "follow" };
   return fetch(
-    "https://api.coinbase.com/v2/exchange-rates?currency=BNB",
+    "https://api.coinbase.com/v2/exchange-rates?currency=ETH",
     requestOptions
   )
     .then((response) => response.json())
